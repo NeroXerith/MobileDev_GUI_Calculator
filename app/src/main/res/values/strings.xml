@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">gui_calculator</string>
+    <string name="txt_dot">.</string>
+    <string name="txt_0">0</string>
+    <string name="txt_1">1</string>
+    <string name="txt_2">2</string>
+    <string name="txt_3">3</string>
+    <string name="txt_4">4</string>
+    <string name="txt_5">5</string>
+    <string name="txt_6">6</string>
+    <string name="txt_7">7</string>
+    <string name="txt_8">8</string>
+    <string name="txt_9">9</string>
+    <string name="txt_add">+</string>
+    <string name="txt_minus">-</string>
+    <string name="txt_multipl">x</string>
+    <string name="txt_divide">÷</string>
+    <string name="txt_ce">CE</string>
+    <string name="txt_c">C</string>
+    <string name="txt_equals">=</string>
+    <string name="txt_operation"></string>
+    <string name="txt_prevNum"></string>
+    <string name="txt_currentNum"></string>
 </resources>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2a2b2a"
+    android:padding="5dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
    <LinearLayout
@@ -26,14 +27,55 @@
            app:cornerRadius="0dp" />
    </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="1234"
-        android:textAlignment="textEnd"
-        android:textColor="#c7c9c7"
-        android:textSize="95sp" />
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="-25dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="1234"
+            android:textAlignment="textEnd"
+            android:textColor="#c7c9c7"
+            android:textSize="30sp"
+            android:layout_weight="10"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-10dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="+"
+            android:textAlignment="textEnd"
+            android:textColor="#c7c9c7"
+            android:textSize="30sp"
+            android:layout_weight="10"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:text="1234567"
+            android:textAlignment="textEnd"
+            android:textColor="#c7c9c7"
+            android:textSize="70sp"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeMinTextSize="30sp"
+            />
+
+    </LinearLayout>
+
 
 
     <LinearLayout
@@ -45,7 +87,7 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="2"
-            android:text="CE"
+            android:text="@string/txt_ce"
             android:textColor="#c3c7c3"
             android:textSize="45sp"
             app:cornerRadius="6dp"
@@ -56,7 +98,7 @@
             android:layout_weight="2"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="C"
+            android:text="@string/txt_c"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -66,7 +108,7 @@
             android:layout_weight="1.34"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="/"
+            android:text="@string/txt_divide"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -84,7 +126,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="9"
+            android:text="@string/txt_9"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -94,7 +136,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="8"
+            android:text="@string/txt_8"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -104,7 +146,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="7"
+            android:text="@string/txt_7"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -114,55 +156,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="-"
-            android:textColor="#c3c7c3"
-            app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="-8dp"
-        android:layout_height="100dp"
-        >
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="2dp"
-            android:textSize="45sp"
-            android:text="6"
-            android:textColor="#c3c7c3"
-            app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="2dp"
-            android:textSize="45sp"
-            android:text="5"
-            android:textColor="#c3c7c3"
-            app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="2dp"
-            android:textSize="45sp"
-            android:text="4"
-            android:textColor="#c3c7c3"
-            app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="2dp"
-            android:textSize="45sp"
-            android:text="+"
+            android:text="@string/txt_minus"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -180,7 +174,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="3"
+            android:text="@string/txt_6"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -190,7 +184,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="2"
+            android:text="@string/txt_5"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -200,7 +194,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="1"
+            android:text="@string/txt_4"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -210,7 +204,55 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:textSize="45sp"
-            android:text="."
+            android:text="@string/txt_add"
+            android:textColor="#c3c7c3"
+            app:cornerRadius="6dp"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="-8dp"
+        android:layout_height="100dp"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:textSize="45sp"
+            android:text="@string/txt_3"
+            android:textColor="#c3c7c3"
+            app:cornerRadius="6dp"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:textSize="45sp"
+            android:text="@string/txt_2"
+            android:textColor="#c3c7c3"
+            app:cornerRadius="6dp"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:textSize="45sp"
+            android:text="@string/txt_1"
+            android:textColor="#c3c7c3"
+            app:cornerRadius="6dp"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:textSize="45sp"
+            android:text="@string/txt_dot"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -227,7 +269,7 @@
             android:layout_margin="2dp"
             android:layout_weight="3"
             android:textSize="45sp"
-            android:text="0"
+            android:text="@string/txt_0"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
@@ -237,7 +279,7 @@
             android:layout_margin="2dp"
             android:textSize="45sp"
             android:layout_weight="1"
-            android:text="="
+            android:text="@string/txt_equals"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
             tools:ignore="ButtonStyle" />
