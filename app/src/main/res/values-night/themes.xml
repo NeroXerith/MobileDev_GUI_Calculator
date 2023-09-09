@@ -3,5 +3,8 @@
     <style name="Base.Theme.Gui_calculator" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">#494a49</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorTertiary">#2a2b2a</item>
     </style>
 </resources>
