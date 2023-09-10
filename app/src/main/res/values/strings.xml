@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">gui_calculator</string>
+    <string name="app_title">GUI CALCULATOR</string>
+    <string name="app_exit">EXIT </string>
     <string name="txt_dot">.</string>
     <string name="txt_0">0</string>
     <string name="txt_1">1</string>
@@ -13,7 +15,7 @@
     <string name="txt_9">9</string>
     <string name="txt_add">+</string>
     <string name="txt_minus">-</string>
-    <string name="txt_multipl">x</string>
+    <string name="txt_multiply">x</string>
     <string name="txt_divide">÷</string>
     <string name="txt_ce">CE</string>
     <string name="txt_c">C</string>

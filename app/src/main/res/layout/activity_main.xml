@@ -12,19 +12,35 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_gravity="top"
+       android:orientation="horizontal"
        android:layout_marginTop="-4dp"
        >
 
        <Button
            android:layout_width="match_parent"
-           android:layout_height="100dp"
+           android:layout_height="92dp"
            android:layout_marginBottom="20dp"
+           android:layout_weight="2"
            android:enabled="false"
-           android:text="GUI CALCULATOR"
+           android:text="@string/app_title"
            android:textAlignment="center"
            android:textColor="#F6F3F3"
-           android:textSize="30sp"
+           android:textSize="20sp"
            app:cornerRadius="0dp" />
+       <Button
+           android:layout_width="200dp"
+           android:layout_height="92dp"
+           android:layout_marginBottom="20dp"
+           android:layout_weight="2"
+           android:enabled="true"
+           android:text="@string/app_exit"
+           android:textAlignment="center"
+           android:textColor="#F6F3F3"
+           android:textSize="20sp"
+           app:cornerRadius="0dp"
+           android:onClick="actionBtn"
+           />
+
    </LinearLayout>
 
     <LinearLayout
@@ -34,14 +50,14 @@
         android:layout_marginBottom="-25dp"
         >
         <TextView
+            android:id="@+id/tv_prevNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="1234"
+            android:text="@string/txt_prevNum"
             android:textAlignment="textEnd"
             android:textColor="#c7c9c7"
             android:textSize="30sp"
-            android:layout_weight="10"
             />
 
     </LinearLayout>
@@ -51,10 +67,11 @@
         android:layout_marginBottom="-10dp"
         >
         <TextView
+            android:id="@+id/tv_operation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="+"
+            android:text="@string/txt_operation"
             android:textAlignment="textEnd"
             android:textColor="#c7c9c7"
             android:textSize="30sp"
@@ -62,17 +79,17 @@
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_currentNum"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:text="1234567"
-            android:textAlignment="textEnd"
-            android:textColor="#c7c9c7"
-            android:textSize="70sp"
             android:autoSizeMaxTextSize="70sp"
             android:autoSizeMinTextSize="30sp"
-            />
+            android:text="@string/txt_currentNum"
+            android:textAlignment="textEnd"
+            android:textColor="#c7c9c7"
+            android:textSize="70sp" />
 
     </LinearLayout>
 
@@ -83,6 +100,7 @@
         android:layout_height="100dp">
 
         <Button
+            android:id="@+id/btn_ce"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
@@ -91,8 +109,10 @@
             android:textColor="#c3c7c3"
             android:textSize="45sp"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            android:onClick="actionBtn"
+            tools:ignore="ButtonStyle,VisualLintButtonSize" />
         <Button
+            android:id="@+id/btn_c"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -101,8 +121,10 @@
             android:text="@string/txt_c"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            android:onClick="actionBtn"
+            tools:ignore="ButtonStyle,VisualLintButtonSize" />
         <Button
+            android:id="@+id/btn_divide"
             android:layout_width="98dp"
             android:layout_height="match_parent"
             android:layout_weight="1.34"
@@ -111,7 +133,8 @@
             android:text="@string/txt_divide"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
     </LinearLayout>
 
     <LinearLayout
@@ -121,6 +144,7 @@
         >
 
         <Button
+            android:id="@+id/btn_9"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -129,8 +153,10 @@
             android:text="@string/txt_9"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
         <Button
+            android:id="@+id/btn_8"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -139,8 +165,10 @@
             android:text="@string/txt_8"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
         <Button
+            android:id="@+id/btn_7"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -149,8 +177,10 @@
             android:text="@string/txt_7"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
         <Button
+            android:id="@+id/btn_minus"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -159,7 +189,8 @@
             android:text="@string/txt_minus"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
     </LinearLayout>
 
     <LinearLayout
@@ -169,6 +200,7 @@
         >
 
         <Button
+            android:id="@+id/btn_6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -177,8 +209,11 @@
             android:text="@string/txt_6"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"
+            />
         <Button
+            android:id="@+id/btn_5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -187,8 +222,10 @@
             android:text="@string/txt_5"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
         <Button
+            android:id="@+id/btn_4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -197,17 +234,21 @@
             android:text="@string/txt_4"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
+
         <Button
+            android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_margin="2dp"
-            android:textSize="45sp"
+            android:layout_weight="1"
             android:text="@string/txt_add"
             android:textColor="#c3c7c3"
+            android:textSize="45sp"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            android:onClick="actionBtn"
+            tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck" />
     </LinearLayout>
 
     <LinearLayout
@@ -217,6 +258,7 @@
         >
 
         <Button
+            android:id="@+id/btn_3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -225,8 +267,10 @@
             android:text="@string/txt_3"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
         <Button
+            android:id="@+id/btn_2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -235,8 +279,10 @@
             android:text="@string/txt_2"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
         <Button
+            android:id="@+id/btn_1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -245,17 +291,21 @@
             android:text="@string/txt_1"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
+
         <Button
+            android:id="@+id/btn_multiply"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_margin="2dp"
-            android:textSize="45sp"
-            android:text="@string/txt_dot"
+            android:layout_weight="1"
+            android:text="@string/txt_multiply"
             android:textColor="#c3c7c3"
+            android:textSize="45sp"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -264,16 +314,32 @@
         >
 
         <Button
-            android:layout_width="305dp"
+            android:id="@+id/btn_0"
+            android:layout_width="98dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:textSize="45sp"
             android:text="@string/txt_0"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"
+            />
         <Button
+            android:id="@+id/btn_dot"
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:textSize="45sp"
+            android:layout_weight="1"
+            android:text="@string/txt_dot"
+            android:textColor="#c3c7c3"
+            app:cornerRadius="6dp"
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
+        <Button
+            android:id="@+id/btn_equals"
             android:layout_width="98dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
@@ -282,7 +348,8 @@
             android:text="@string/txt_equals"
             android:textColor="#c3c7c3"
             app:cornerRadius="6dp"
-            tools:ignore="ButtonStyle" />
+            tools:ignore="ButtonStyle"
+            android:onClick="actionBtn"/>
 
     </LinearLayout>
 
