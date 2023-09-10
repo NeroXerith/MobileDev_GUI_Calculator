@@ -11,13 +11,19 @@ public class MainActivity extends AppCompatActivity {
     TextView tvPrev;
     TextView tvOperation;
     String tmpHandler = "";
-    Boolean isEqualClickedOnce= false;
+    Boolean isEqualClickedOnce = false;
     int decimalCtr = 0;
+
+    private static final String ADD = "+";
+    private static final String SUBTRACT = "-";
+    private static final String MULTIPLY = "x";
+    private static final String DIVIDE = "÷";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Initialize TextViews
         tvCurrent = findViewById(R.id.tv_currentNum);
         tvPrev = findViewById(R.id.tv_prevNum);
         tvOperation = findViewById(R.id.tv_operation);
@@ -25,95 +31,119 @@ public class MainActivity extends AppCompatActivity {
 
     public void actionBtn(View view) {
         if (isEqualClickedOnce) {
-            // Reset isEqualClickedOnce to false and clear the UI elements.
-            isEqualClickedOnce = false;
-            tvPrev.setText("");
-            tvOperation.setText("");
-            tmpHandler = "";
+            // If "=" was clicked previously, clear the UI elements and reset flags.
+            clearUIElements();
         } else {
             String buttonText = ((TextView) view).getText().toString();
             if (Character.isDigit(buttonText.charAt(0)) || buttonText.equals(".")) {
-                tmpHandler += buttonText;
-                tvCurrent.setText(tmpHandler);
-
-                // restrict from multiple inputs of period to prevent app crash
-                if(buttonText.equals(".")){
-                    decimalCtr++;
-                }
-            } else if (tvPrev.getText().toString().isEmpty() && (buttonText.equals("+") || buttonText.equals("-") || buttonText.equals("x") || buttonText.equals("÷"))) {
-                tvOperation.setText(buttonText);
-                tvPrev.setText(tmpHandler);
-                decimalCtr--; // to counter the validation == 2 by subtracting 1 so the 2nd number can input decimal
-                tvCurrent.setText("");
-                tmpHandler = "";
+                // Handle digit input
+                handleDigitInput(buttonText);
+            } else if (tvPrev.getText().toString().isEmpty() && isOperator(buttonText)) {
+                // Handle operator input when there's no previous number
+                handleOperatorInput(buttonText);
             } else if (buttonText.equals("CE")) {
-                tvCurrent.setText("");
-                tmpHandler = "";
-                decimalCtr = 0;
+                clearCurrent();
             } else if (buttonText.equals("C")) {
-                tvPrev.setText("");
-                tvCurrent.setText("");
-                tvOperation.setText("");
-                tmpHandler = "";
-                decimalCtr = 0;
-                isEqualClickedOnce = false;
-
-            // Solving first num and second num inputs
+                clearUIElements();
             } else if (buttonText.equals("=")) {
-                // Validations to prevent crashing the app
-                if(tvPrev.getText().equals("") || !tvOperation.getText().equals("") && tvCurrent.getText().equals("") || decimalCtr == 2 || tvCurrent.getText().equals(".") || tvPrev.getText().equals(".")){
-                    showToast("You cannot perform this action!");
-                } else {
-                    double n1, n2;
-                    n1 = Double.parseDouble(tvPrev.getText().toString());
-                    n2 = Double.parseDouble(tvCurrent.getText().toString());
-                    calculate(n1, n2);
-                }
-            } else if(buttonText.equals("EXIT")){
-                System.exit(0);
+                performCalculation();
+            } else if (buttonText.equals("EXIT")) {
+                finish();
             }
         }
     }
-    private void calculate(Double n1, Double n2){
-        double calculate;
+
+    private void handleDigitInput(String buttonText) {
+        tmpHandler += buttonText;
+        tvCurrent.setText(tmpHandler);
+        // Counts the decimal when clicked to satisfy the decimalCtr == 2 validation
+        if (buttonText.equals(".")) {
+            decimalCtr++;
+        }
+    }
+
+    private boolean isOperator(String buttonText) {
+        // Check if the button text represents an operator
+        return buttonText.equals(ADD) || buttonText.equals(SUBTRACT) ||
+                buttonText.equals(MULTIPLY) || buttonText.equals(DIVIDE);
+    }
+
+    private void handleOperatorInput(String buttonText) {
+        tvOperation.setText(buttonText);
+        tvPrev.setText(tmpHandler);
+        decimalCtr--;
+        tvCurrent.setText("");
+        tmpHandler = "";
+    }
+
+    private void clearCurrent() {
+        tvCurrent.setText("");
+        tmpHandler = "";
+        decimalCtr = 0;
+    }
+
+    private void clearUIElements() {
+        // Clear all UI elements and reset flags
+        tvPrev.setText("");
+        tvCurrent.setText("");
+        tvOperation.setText("");
+        tmpHandler = "";
+        decimalCtr = 0;
+        isEqualClickedOnce = false;
+    }
+
+    private void performCalculation() {
+        if (tvPrev.getText().toString().isEmpty() ||
+                !tvOperation.getText().toString().isEmpty() && tvCurrent.getText().toString().isEmpty() ||
+                decimalCtr == 2 || tvCurrent.getText().toString().equals(".") || tvPrev.getText().toString().equals(".")) {
+            // Validation to prevent invalid calculations
+            showToast("You cannot perform this action!");
+        } else {
+            try {
+                // Parse the previous and current numbers
+                double n1 = Double.parseDouble(tvPrev.getText().toString());
+                double n2 = Double.parseDouble(tvCurrent.getText().toString());
+                calculate(n1, n2);
+            } catch (NumberFormatException e) {
+                showToast("Invalid input!");
+            }
+        }
+    }
+
+    private void calculate(double n1, double n2) {
         String operation = tvOperation.getText().toString();
-        switch(operation){
-            case "+":
-                calculate = n1 + n2;
-                tvPrev.setText(n1+" + "+n2+" =");
-                tvCurrent.setText(String.valueOf(calculate));
+        double result = 0;
+        switch (operation) {
+            case ADD:
+                result = n1 + n2;
                 break;
-            case "-":
-                calculate = n1 - n2;
-                tvPrev.setText(n1+" - "+n2+" =");
-                tvCurrent.setText(String.valueOf(calculate));
+            case SUBTRACT:
+                result = n1 - n2;
                 break;
-            case "x":
-                calculate = n1 * n2;
-                tvPrev.setText(n1+" x "+n2+" =");
-                tvCurrent.setText(String.valueOf(calculate));
+            case MULTIPLY:
+                result = n1 * n2;
                 break;
-            case "÷":
-                if(n1 == 0){
-                    tvPrev.setText(n1+" ÷ "+n2+" =");
-                    tvCurrent.setTextSize(40);
-                    tvCurrent.setText("Error: Division by zero!");
-                } else if (n2 == 0){
-                    tvPrev.setText(n1+" ÷ "+n2+" =");
+            case DIVIDE:
+                if (n2 == 0) {
+                    // Handle division by zero
                     tvCurrent.setTextSize(40);
                     tvCurrent.setText("Error: Division by zero!");
                 } else {
-                    calculate = n1 / n2;
-                    tvPrev.setText(n1+" ÷ "+n2+" =");
-                    tvCurrent.setText(String.valueOf(calculate));
+                    result = n1 / n2;
                 }
                 break;
         }
-        decimalCtr = 0; // Reset period restriction after getting the results
-        isEqualClickedOnce = true; // Prevent app crashing when equals is clicked multiple times after getting results
-        tvOperation.setText(""); // Value Reset
-        tmpHandler =""; // Value Reset
+
+        // Display the result and update UI elements
+        tvPrev.setText(n1 + " " + operation + " " + n2 + " =");
+        tvCurrent.setText(String.valueOf(result));
+
+        decimalCtr = 0;
+        isEqualClickedOnce = true;
+        tvOperation.setText("");
+        tmpHandler = "";
     }
+
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
