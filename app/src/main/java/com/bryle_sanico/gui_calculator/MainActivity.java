@@ -3,6 +3,7 @@ package com.bryle_sanico.gui_calculator;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         // Counts the decimal when clicked to satisfy the decimalCtr == 2 validation
         if (buttonText.equals(".")) {
             decimalCtr++;
+            Button decimalButton = findViewById(R.id.btn_dot);
+            decimalButton.setEnabled(false);
         }
     }
 
@@ -74,12 +77,18 @@ public class MainActivity extends AppCompatActivity {
         decimalCtr--;
         tvCurrent.setText("");
         tmpHandler = "";
+        Button decimalButton = findViewById(R.id.btn_dot);
+        decimalButton.setEnabled(true);
     }
 
     private void clearCurrent() {
         tvCurrent.setText("");
         tmpHandler = "";
         decimalCtr = 0;
+        if(decimalCtr < 2) {
+            Button decimalButton = findViewById(R.id.btn_dot);
+            decimalButton.setEnabled(true);
+        }
     }
 
     private void clearUIElements() {
@@ -90,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         tmpHandler = "";
         decimalCtr = 0;
         isEqualClickedOnce = false;
+        Button decimalButton = findViewById(R.id.btn_dot);
+        decimalButton.setEnabled(true);
     }
 
     private void performCalculation() {
@@ -142,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
         isEqualClickedOnce = true;
         tvOperation.setText("");
         tmpHandler = "";
+        Button decimalButton = findViewById(R.id.btn_dot);
+        decimalButton.setEnabled(true);
     }
 
     private void showToast(String message) {
