@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvPrev;
     TextView tvOperation;
     String tmpHandler = "";
-    Boolean isEqualClickedOnce = false;
+    boolean isEqualClickedOnce = false;
     int decimalCtr = 0;
 
     private static final String ADD = "+";
@@ -24,94 +24,103 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Initialize TextViews
+        initializeViews(); // Initialize the UI elements.
+    }
+
+    // Initialize UI elements.
+    private void initializeViews() {
         tvCurrent = findViewById(R.id.tv_currentNum);
         tvPrev = findViewById(R.id.tv_prevNum);
         tvOperation = findViewById(R.id.tv_operation);
+        enableDecimalButton(true); // Enable the decimal button by default.
     }
 
     public void actionBtn(View view) {
+        String buttonText = ((TextView) view).getText().toString();
+
         if (isEqualClickedOnce) {
-            // If "=" was clicked previously, clear the UI elements and reset flags.
-            clearUIElements();
+            clearUIElements(); // If "=" was clicked previously, clear UI elements.
+        } else if (Character.isDigit(buttonText.charAt(0)) || buttonText.equals(".")) {
+            handleDigitInput(buttonText); // Handle digit input.
+        } else if (tvPrev.getText().toString().isEmpty() && isOperator(buttonText)) {
+            handleOperatorInput(buttonText); // Handle operator input.
         } else {
-            String buttonText = ((TextView) view).getText().toString();
-            if (Character.isDigit(buttonText.charAt(0)) || buttonText.equals(".")) {
-                // Handle digit input
-                handleDigitInput(buttonText);
-            } else if (tvPrev.getText().toString().isEmpty() && isOperator(buttonText)) {
-                // Handle operator input when there's no previous number
-                handleOperatorInput(buttonText);
-            } else if (buttonText.equals("CE")) {
-                clearCurrent();
-            } else if (buttonText.equals("C")) {
-                clearUIElements();
-            } else if (buttonText.equals("=")) {
-                performCalculation();
-            } else if (buttonText.equals("EXIT")) {
-                finish();
-            }
+            handleAction(buttonText); // Handle other actions.
         }
     }
 
+    // Handle digit input.
     private void handleDigitInput(String buttonText) {
         tmpHandler += buttonText;
         tvCurrent.setText(tmpHandler);
-        // Counts the decimal when clicked to satisfy the decimalCtr == 2 validation
+
         if (buttonText.equals(".")) {
             decimalCtr++;
-            Button decimalButton = findViewById(R.id.btn_dot);
-            decimalButton.setEnabled(false);
+            enableDecimalButton(false); // Disable the decimal button.
         }
     }
 
+    // Check if the button text represents an operator.
     private boolean isOperator(String buttonText) {
-        // Check if the button text represents an operator
         return buttonText.equals(ADD) || buttonText.equals(SUBTRACT) ||
                 buttonText.equals(MULTIPLY) || buttonText.equals(DIVIDE);
     }
 
+    // Handle operator input.
     private void handleOperatorInput(String buttonText) {
         tvOperation.setText(buttonText);
         tvPrev.setText(tmpHandler);
         decimalCtr--;
         tvCurrent.setText("");
         tmpHandler = "";
-        Button decimalButton = findViewById(R.id.btn_dot);
-        decimalButton.setEnabled(true);
+        enableDecimalButton(true); // Enable the decimal button.
     }
 
+    // Handle actions like "CE," "C," "=", and "EXIT."
+    private void handleAction(String buttonText) {
+        switch (buttonText) {
+            case "CE":
+                clearCurrent();
+                break;
+            case "C":
+                clearUIElements();
+                break;
+            case "=":
+                performCalculation();
+                break;
+            case "EXIT":
+                finish();
+                break;
+        }
+    }
+
+    // Clear the current input.
     private void clearCurrent() {
         tvCurrent.setText("");
         tmpHandler = "";
         decimalCtr = 0;
-        if(decimalCtr < 2) {
-            Button decimalButton = findViewById(R.id.btn_dot);
-            decimalButton.setEnabled(true);
-        }
+        enableDecimalButton(true); // Enable the decimal button.
     }
 
+    // Clear all UI elements and reset flags.
     private void clearUIElements() {
-        // Clear all UI elements and reset flags
         tvPrev.setText("");
         tvCurrent.setText("");
         tvOperation.setText("");
         tmpHandler = "";
         decimalCtr = 0;
         isEqualClickedOnce = false;
-        Button decimalButton = findViewById(R.id.btn_dot);
-        decimalButton.setEnabled(true);
+        enableDecimalButton(true); // Enable the decimal button.
     }
 
+    // Perform the calculation.
     private void performCalculation() {
         if (tvPrev.getText().toString().isEmpty() ||
                 !tvOperation.getText().toString().isEmpty() && tvCurrent.getText().toString().isEmpty() ||
                 decimalCtr == 2 || tvCurrent.getText().toString().equals(".") || tvPrev.getText().toString().equals(".")) {
-            // Validation to prevent invalid calculations
             showToast("You cannot perform this action!");
         } else {
             try {
-                // Parse the previous and current numbers
                 double n1 = Double.parseDouble(tvPrev.getText().toString());
                 double n2 = Double.parseDouble(tvCurrent.getText().toString());
                 calculate(n1, n2);
@@ -119,8 +128,10 @@ public class MainActivity extends AppCompatActivity {
                 showToast("Invalid input!");
             }
         }
+        enableDecimalButton(true); // Enable the decimal button.
     }
 
+    // Perform the actual calculation.
     private void calculate(double n1, double n2) {
         String operation = tvOperation.getText().toString();
         double result = 0;
@@ -136,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case DIVIDE:
                 if (n2 == 0) {
-                    // Handle division by zero
                     tvCurrent.setTextSize(40);
                     tvCurrent.setText("Error: Division by zero!");
                 } else {
@@ -144,20 +154,23 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
-
-        // Display the result and update UI elements
         tvPrev.setText(n1 + " " + operation + " " + n2 + " =");
         tvCurrent.setText(String.valueOf(result));
-
         decimalCtr = 0;
         isEqualClickedOnce = true;
         tvOperation.setText("");
         tmpHandler = "";
-        Button decimalButton = findViewById(R.id.btn_dot);
-        decimalButton.setEnabled(true);
+        enableDecimalButton(true); // Enable the decimal button.
     }
 
+    // Show a toast message.
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    // Enable or disable the decimal button.
+    private void enableDecimalButton(boolean enabled) {
+        Button decimalButton = findViewById(R.id.btn_dot);
+        decimalButton.setEnabled(enabled);
     }
 }
